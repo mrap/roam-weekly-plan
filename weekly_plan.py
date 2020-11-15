@@ -10,98 +10,60 @@ def suffix(d):
 def custom_strftime(fmt, t):
     return t.strftime(fmt).replace("{S}", str(t.day) + suffix(t.day))
 
+def get_today():
+    today = datetime.date.today()
+    return tagged(custom_strftime("%B {S}, %Y", today))
+
+def get_tomorrow():
+    today = datetime.date.today()
+    tomorrow = today + datetime.timedelta(days=1)
+    return tagged(custom_strftime("%B {S}, %Y", tomorrow))
+
+def tagged(s):
+    return '[[{s}]]'.format(s=s)
 
 def next_week():
     today = datetime.date.today()
     next_monday = today + datetime.timedelta(days=-today.weekday(), weeks=1)
     return [
-        custom_strftime("%B {S}, %Y", next_monday + datetime.timedelta(days=i))
+        tagged(custom_strftime("%B {S}, %Y", next_monday + datetime.timedelta(days=i)))
         for i in range(0, 7)
     ]
-
 
 def generate_template():
     week = next_week()
     template = """
-Week:: [[{monday}]]
-Weekly Review:: [[Weekly Review {monday}]]
-## Pages to Reference
-    Go through these to find priorities for upcoming week.
-    [[TODO]]
-    [[Goals]]
-    [[📝 Projects]]
-    [[📓 Article Ideas]]
-    [[🧠 Research]]
-## Top Priorities
-## Daily Goals
-    Monday: [[{monday}]]
-    Tuesday: [[{tuesday}]]
-    Wednesday: [[{wednesday}]]
-    Thursday: [[{thursday}]]
-    Friday: [[{friday}]]
-    Saturday: [[{saturday}]]
-    Sunday: [[{sunday}]]
-## [[Daily Habits]]
-    If these have a daily notes attribute, add what you did to those.
-    Process "Things to Process" and Writing Inbox
-        {{{{[[TODO]]}}}} [[{monday}]]
-        {{{{[[TODO]]}}}} [[{wednesday}]]
-        {{{{[[TODO]]}}}} [[{friday}]]
-        {{{{[[TODO]]}}}} [[{sunday}]]
-    Process Reading Inboxes
-        {{{{[[TODO]]}}}} [[{monday}]]
-        {{{{[[TODO]]}}}} [[{tuesday}]]
-        {{{{[[TODO]]}}}} [[{wednesday}]]
-        {{{{[[TODO]]}}}} [[{thursday}]]
-        {{{{[[TODO]]}}}} [[{friday}]]
-        {{{{[[TODO]]}}}} [[{saturday}]]
-        {{{{[[TODO]]}}}} [[{sunday}]]
-    Research One Research Topic
-        {{{{[[TODO]]}}}} [[{tuesday}]]
-        {{{{[[TODO]]}}}} [[{saturday}]]
-    [[Meditate]]
-        {{{{[[TODO]]}}}} [[{monday}]]
-        {{{{[[TODO]]}}}} [[{tuesday}]]
-        {{{{[[TODO]]}}}} [[{wednesday}]]
-        {{{{[[TODO]]}}}} [[{thursday}]]
-        {{{{[[TODO]]}}}} [[{friday}]]
-        {{{{[[TODO]]}}}} [[{saturday}]]
-        {{{{[[TODO]]}}}} [[{sunday}]]
-    [[Exercise]]
-        {{{{[[TODO]]}}}} [[{monday}]]
-        {{{{[[TODO]]}}}} [[{tuesday}]]
-        {{{{[[TODO]]}}}} [[{wednesday}]]
-        {{{{[[TODO]]}}}} [[{thursday}]]
-        {{{{[[TODO]]}}}} [[{friday}]]
-        {{{{[[TODO]]}}}} [[{saturday}]]
-        {{{{[[TODO]]}}}} [[{sunday}]]
-    [[Read]]
-        {{{{[[TODO]]}}}} [[{monday}]]
-        {{{{[[TODO]]}}}} [[{tuesday}]]
-        {{{{[[TODO]]}}}} [[{wednesday}]]
-        {{{{[[TODO]]}}}} [[{thursday}]]
-        {{{{[[TODO]]}}}} [[{friday}]]
-        {{{{[[TODO]]}}}} [[{saturday}]]
-        {{{{[[TODO]]}}}} [[{sunday}]]
-    [[Greek]]
-        {{{{[[TODO]]}}}} [[{monday}]]
-        {{{{[[TODO]]}}}} [[{tuesday}]]
-        {{{{[[TODO]]}}}} [[{wednesday}]]
-        {{{{[[TODO]]}}}} [[{thursday}]]
-        {{{{[[TODO]]}}}} [[{friday}]]
-        {{{{[[TODO]]}}}} [[{saturday}]]
-        {{{{[[TODO]]}}}} [[{sunday}]]
-    [[Bass]]
-        {{{{[[TODO]]}}}} [[{monday}]]
-        {{{{[[TODO]]}}}} [[{tuesday}]]
-        {{{{[[TODO]]}}}} [[{wednesday}]]
-        {{{{[[TODO]]}}}} [[{thursday}]]
-        {{{{[[TODO]]}}}} [[{friday}]]
-        {{{{[[TODO]]}}}} [[{saturday}]]
-        {{{{[[TODO]]}}}} [[{sunday}]]
-	Update public mind garden
-        {{{{[[TODO]]}}}} [[{saturday}]]
+{{{{[[embed]]: ((((dkZMMwGEm))))}}}}
+{{{{[[query]]: {{and: [[Daily Design]] {today} }}}}}}
+## [[DoingToday]]
+    Daily Practice
+    Morning Journal
+    Add todos from linked references
+    List and rank tasks
+## [[DoneToday]]
+# Journal
+    ## [[Morning Journal]] {{{{word-count}}}}
+        [[Meditation Reflection]]
+        [[What am I grateful for?]]
+        [[What's on my mind?]]
+            [[What am I excited about?]]
+            [[What am I worried about?]] / [[What's bothering me?]]
+            [[Is there anything I'm forgetting?]]
+        [[Daily Design]]
+        [[Health Sitrep]]
+    ## [[Evening Reflection]] {{{{word-count}}}}
+        [[Evening Brain Dump]]
+        [[How are you feeling today?]]
+        [[What could you have done better?]]
+        [[Amazing things that happened]]
+        [[What did you learn today?]]
+        [[Tomorrow's Tasks]] {tomorrow}
+        [[Tonight's Play]]
+        [[Positivity Score]]
+        [[Daily Design Recap]]
     """.format(
+        today=get_today(),
+        tomorrow=get_tomorrow(),
         monday=week[0],
         tuesday=week[1],
         wednesday=week[2],
