@@ -43,6 +43,7 @@ def generate_template():
 ## [[DoneToday]]
 # Journal
     ## [[Morning Journal]] {{{{word-count}}}}
+        [[Writing Exercise: Free Write]]
         [[Meditation Reflection]]
         [[What am I grateful for?]]
         [[What's on my mind?]]
