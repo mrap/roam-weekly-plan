@@ -40,6 +40,8 @@ def generate_template():
     Morning Journal
     Add todos from linked references
     List and rank tasks
+    Daily Design
+    Schedule work sessions
 ## [[DoneToday]]
 # Journal
     ## [[Morning Journal]] {{{{word-count}}}}
