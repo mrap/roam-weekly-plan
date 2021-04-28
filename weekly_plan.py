@@ -41,7 +41,6 @@ def generate_template():
     Add todos from linked references
     List and rank tasks
     Daily Design
-    Schedule work sessions
 ## [[DoneToday]]
 # Journal
     ## [[Morning Journal]] {{{{word-count}}}}
