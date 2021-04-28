@@ -33,7 +33,7 @@ def next_week():
 def generate_template():
     week = next_week()
     template = """
-{{{{[[embed]]: ((((gr9NZOSMZ))))}}}}
+{{{{[[embed]]: ((((Q3lFnTYvv))))}}}}
 {{{{[[query]]: {{and: [[Daily Design]] {today} }}}}}}
 ## [[DoingToday]]
     Daily Practice
