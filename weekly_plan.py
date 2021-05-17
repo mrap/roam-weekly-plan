@@ -51,6 +51,7 @@ def generate_template():
             [[What am I excited about?]]
             [[What am I worried about?]] / [[What's bothering me?]]
             [[Is there anything I'm forgetting?]]
+        [[What do I feel like creating?]]
         [[Daily Design]]
         [[Health Sitrep]]
     ## [[Evening Reflection]] {{{{word-count}}}}
