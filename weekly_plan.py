@@ -36,11 +36,6 @@ def generate_template():
 {{{{[[embed]]: ((((4vMjMkxvv))))}}}}
 {{{{[[query]]: {{and: [[Daily Design]] {today} }}}}}}
 ## [[DoingToday]]
-    Daily Practice
-    Morning Journal
-    Add todos from linked references
-    List and rank tasks
-    Daily Design
 ## [[DoneToday]]
 # Journal
     ## [[Morning Journal]] {{{{word-count}}}}
